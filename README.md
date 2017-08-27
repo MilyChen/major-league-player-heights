@@ -1,5 +1,4 @@
-# Player Height & Weight by Major League Sports
->An Introduction to Data Visualization with Pandas
+# Simple Scatter Plot in Pandas
 
 ## Summary 
 >Displays the heights and weights of players in a scatter plot for the sports: NHL, MLB, NFL and NBA. 
