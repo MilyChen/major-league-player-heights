@@ -20,6 +20,7 @@ sports = ['mlb', 'nfl', 'nba', 'nhl']
 shapes = ["*", "x", "^", "D"]
 plot_x_ax = {}
 plot_y_ax = {}
+df_fit_fn = {}
 
 #===first plot of combined data===========================================================================
 plt.figure(0)  #
@@ -33,11 +34,11 @@ for i, df in enumerate(data):
     plot_x_ax[i] = np.array(df['#Weight'])
     plot_y_ax[i] = np.array(df.height_as_decimals)
     df_fit = np.polyfit(plot_x_ax[i], plot_y_ax[i], 1)
-    df_fit_fn = np.poly1d(df_fit)
+    df_fit_fn[i] = np.poly1d(df_fit)
     #plot each player's height and weight
     plt.plot(plot_x_ax[i], plot_y_ax[i], shapes[i], color=colors[i], alpha=0.2, label=sports[i])
     #plot line of best fit
-    plt.plot(plot_x_ax[i], df_fit_fn(plot_x_ax[i]), '-k', color=colors[i], alpha=0.7)
+    plt.plot(plot_x_ax[i], df_fit_fn[i](plot_x_ax[i]), '-k', color=colors[i], alpha=0.7)
    
 
 plt.ylabel("Height (cm)")
@@ -56,7 +57,7 @@ for i, df in enumerate(data):
     ax.set_xlim(150, 350)
     ax.set_ylim(160, 220)
     plt.plot(plot_x_ax[i], plot_y_ax[i], shapes[i], color=colors[i], alpha=0.2, label=sports[i])
-    plt.plot(plot_x_ax[i] , df_fit_fn(plot_x_ax[i]), '-k', color='black', alpha=0.2)
+    plt.plot(plot_x_ax[i] , df_fit_fn[i](plot_x_ax[i]), '-k', color='black', alpha=0.2)
     plt.title(sports[i].upper())
      
 plt.suptitle('Major League Player Heights')
