@@ -22,10 +22,10 @@ These packages need to be installed before they're able to be used in Python.
  
 ### 2 - Import data  
 ```python
-data_nhla = pd.read_csv('C:\...\MySportsFeed\NHL Data\MYSPORTSFEEDS-ACTIVE_PLAYERS-NHL-20162017REGULAR.csv')
-data_mlb = pd.read_csv('C:\...\MySportsFeed\MLB Data\MYSPORTSFEEDS-CUMULATIVE_PLAYER_STATS-MLB-2016REGULAR.csv')
-data_nba = pd.read_csv('C:\...\MySportsFeed\NBA Data\MYSPORTSFEEDS-ACTIVE_PLAYERS-NBA-20162017REGULAR.csv')
-data_nfl = pd.read_csv('C:\...MySportsFeed\NFL Data\MYSPORTSFEEDS-ACTIVE_PLAYERS-NFL-20162017REGULAR.csv')
+data_nhla = pd.read_csv('C:\...\NHL Data\MYSPORTSFEEDS-ACTIVE_PLAYERS-NHL.csv')
+data_mlb = pd.read_csv('C:\...\MLB Data\MYSPORTSFEEDS-CUMULATIVE_PLAYER_STATS-MLB.csv')
+data_nba = pd.read_csv('C:\...\NBA Data\MYSPORTSFEEDS-ACTIVE_PLAYERS-NBA.csv')
+data_nfl = pd.read_csv('C:\...\NFL Data\MYSPORTSFEEDS-ACTIVE_PLAYERS-NFL.csv')
 ```
 Pandas has many built in functions to read from various data structures such as csv, excel, json etc.. This makes it quick and simple to bring data into Python.
 
@@ -37,13 +37,13 @@ df = pd.DataFrame(df[['#Weight', 'height_as_decimals']]).dropna()
 There are a few different things happening with this one line. First, I'm dropping all the unnecessary columns from the dataframe by creating and reassigning the dataframe to a new dataframe with only the columns I'm interested in - weight and height. Second, I'm dropping all rows with one or more NaN values. Pandas also offers the versatility to drop specific rows if a specific column is empty or if 2+ or 3+ columns are empty. If dropping the row is not what you desire, there is also a built-in fill NaN function (.fillna()).
 
 ```python
-df['height_as_decimals'] = df['#Height'].apply(lambda x:np.NaN if pd.isnull(x) else library.height_ftiins_to_cm(x))
+df['height_as_decimals'] = df['#Height'].apply(lambda x:np.NaN if pd.isnull(x) else 
+        library.height_ftiins_to_cm(x))
 ```
 Ensure the data your trying to graph is in a format that can be sorted and graphed. Here I'm converting the values in the Height column, if not null, from the format 6'1" to cms by applying a custom function (see below).
 
 ```python
 def height_ftiins_to_cm(x):
-    # print x
     x = x.replace('"', "")
     heights = x.split("'")
     ft_to_cm = float(heights[0]) * 30
